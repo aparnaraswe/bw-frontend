@@ -1,0 +1,360 @@
+/* Header wrapper */
+.header {
+  width: 100%;
+  /* border-bottom: 1px solid #eee; */
+  background: #fff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 100;
+  position: fixed
+}
+
+
+/* Navbar flex layout */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  position: relative;
+}
+
+/* Left + Right sections */
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  flex: 1;
+}
+
+/* Center logo perfectly centered */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brand img {
+  height: 38px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.brand img:hover {
+  transform: scale(1.05);
+}
+
+/* Nav items */
+.nav-item,
+.main-link {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  /* position: relative; */
+  padding: 15px 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover,
+.main-link:hover {
+  color: #444;
+}
+/* Instead of targeting a:hover */
+.nav-item:hover,
+.nav-item.active {
+  color: #444; /* text color change */
+}
+
+/* Underline for hover on entire nav-item */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+
+/* Expand underline when hovering anywhere on nav-item */
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+
+/* Hover underline animation */
+.nav-item::after,
+.main-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+.nav-item:hover::after,
+.main-link:hover::after,
+.nav-item.active > .main-link::after,
+a.active-link::after {
+  width: 100%;
+}
+
+/* Dropdown (mega menu) */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100vw;
+  margin : 0;
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 30px 80px;
+  display: none;
+  gap: 60px;
+  justify-content: flex-start;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-top: none;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dropdown columns */
+.dropdown-column {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Column headings */
+.dropdown-column h4 {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+/* Dropdown links */
+.dropdown-column a {
+  font-size: 13px;
+  color: #444;
+  margin: 6px 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dropdown-column a:hover {
+  color: #000;
+}
+/* Instead of targeting a:hover */
+.nav-item:hover,
+.nav-item.active {
+  color: #444; /* text color change */
+}
+
+/* Underline for hover on entire nav-item */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+
+/* Expand underline when hovering anywhere on nav-item */
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+.nav-item:hover .dropdown-content {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Classy search styling */
+.search-wrapper.classy {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 36px; /* default icon-only width */
+  height: 36px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  transition: width 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.search-wrapper.classy input {
+  border: none;
+  outline: none;
+  padding: 0 12px;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+  opacity: 0; /* hidden initially */
+  transition: opacity 0.3s ease;
+}
+
+.search-wrapper.classy:hover {
+  width: 180px; /* expands on hover */
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.search-wrapper.classy:hover input {
+  opacity: 1; /* show input on hover */
+}
+
+.search-wrapper.classy .search-icon {
+  font-size: 16px;
+  color: #333;
+  padding: 0 10px;
+  z-index: 1;
+  cursor: pointer;
+}
+.header-search {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 180px;
+  margin-right: 20px;
+}
+
+.header-search::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.header-search:focus {
+  border-color: #000;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.nav-right {
+  display: flex;
+  align-items: center; /* vertically center items */
+  gap: 20px;           /* spacing between search and links */
+  flex: 1;             /* optional: take remaining space */
+  justify-content: flex-end; /* push everything to right */
+}
+
+/* Classy search input */
+.header-search {
+  padding: 6px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 180px;
+}
+
+.header-search::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.header-search:focus {
+  border-color: #000;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Right nav links */
+.nav-right .nav-item {
+  padding: 0 10px;
+}
+@media (max-width: 768px) {
+  .header-search {
+    width: 120px;
+  }
+}
+/* Classy search input */
+.header-search {
+  padding: 8px 16px;              /* more padding for elegance */
+  border-radius: 25px;            /* pill-shaped */
+  border: 1px solid #ccc;         /* subtle border */
+  background: #f5f5f5;            /* light background */
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  width: 180px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(0,0,0,0); /* default no shadow */
+}
+
+.header-search::placeholder {
+  color: #aaa;                    /* soft placeholder */
+  font-style: italic;
+}
+
+.header-search:focus {
+  background: #fff;                /* white on focus */
+  border-color: #000;              /* dark border on focus */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* subtle shadow */
+  width: 220px;                    /* slightly expand */
+}
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search-wrapper .search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none; /* icon doesn’t block typing */
+  font-size: 14px;
+}
+.header-search {
+  padding: 6px 12px;             /* comfortable padding */
+  border-radius: 4px;             /* subtle, sharp corners */
+  border: 1px solid #ccc;         /* soft border */
+  background: #f9f9f9;            /* light neutral background */
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  width: 180px;
+  transition: all 0.3s ease;
+}
+
+.header-search::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.header-search:focus {
+  background: #fff;               /* white on focus */
+  border-color: #000;             /* dark border on focus */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12); /* subtle shadow */
+  width: 200px;                   /* optional slight expansion */
+}

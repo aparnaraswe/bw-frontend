@@ -1,0 +1,65 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-image">
+      <img [src]="hero.image" alt="Hero Image" />
+      <div class="hero-overlay">
+        <div class="hero-text">
+          <h2>{{ hero.title }}</h2>
+          <p>{{ hero.subtitle }}</p>
+          <button class="shop-btn">{{ hero.buttonText }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured-products">
+  <div class="container">
+    <h2 class="section-title">FEATURED</h2>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name" />
+          <div class="product-overlay">
+            <button class="quick-view">QUICK VIEW</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p class="product-price">{{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Collections -->
+<section class="collections">
+  <div class="collections-grid">
+    <div *ngFor="let col of collections" [ngClass]="col.size === 'large' ? 'collection-item large' : 'collection-item'">
+      <img [src]="col.image" [alt]="col.title" />
+      <div class="collection-overlay">
+        <div class="collection-text">
+          <h3>{{ col.title }}</h3>
+          <button class="collection-btn">{{ col.buttonText }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter-content">
+      <h2>{{ newsletter.title }}</h2>
+      <p>{{ newsletter.subtitle }}</p>
+      <form class="newsletter-form">
+        <input type="email" [placeholder]="newsletter.placeholder" />
+        <button type="submit">{{ newsletter.buttonText }}</button>
+      </form>
+    </div>
+  </div>
+</section>

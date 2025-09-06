@@ -1,0 +1,52 @@
+<header class="header">
+  <nav class="nav">
+    <!-- Left options -->
+    <div class="nav-left">
+      <div class="nav-item dropdown"
+           *ngFor="let item of navItems"
+           [class.active]="selectedNav === item.label"
+           (click)="setActive(item.label)">
+        <a class="main-link">{{ item.label }}</a>
+        <div class="dropdown-content" *ngIf="item.dropdown">
+          <div class="dropdown-column" *ngFor="let column of item.dropdown">
+            <h4>{{ column.title }}</h4>
+            <a *ngFor="let link of column.links"
+               [routerLink]="link.routerLink"
+               routerLinkActive="active-link">
+               {{ link.label }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Center Logo -->
+    <div class="nav-center">
+      <a routerLink="/" class="brand">
+        <img src="/logo-black-bw.png" alt="Brand Logo" />
+      </a>
+    </div>
+    <!-- Right options -->
+<div class="nav-right">
+ <div class="search-wrapper">
+  <input 
+    type="text" 
+    placeholder="Search..." 
+    class="header-search"
+    [(ngModel)]="searchQuery"
+    (keyup.enter)="onSearch()"
+  />
+  <i class="fa fa-search search-icon"></i>
+</div>
+
+
+  <a *ngFor="let r of rightNav" 
+     [routerLink]="r.routerLink" 
+     class="nav-item"
+     routerLinkActive="active-link">
+    {{ r.label }}
+  </a>
+</div>
+
+
+  </nav>
+</header>
