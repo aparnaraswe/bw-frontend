@@ -29,6 +29,8 @@ interface NavItem {
 export class HeaderComponent {
   selectedNav: string | null = null;
   searchQuery: string = '';
+  searchActive: boolean = false;
+
 
   navItems: NavItem[] = [
     {
@@ -120,19 +122,26 @@ export class HeaderComponent {
     }
   ];
 
+  
+
   setActive(label: string) {
   this.selectedNav = label;
   }
 
-  onSearch() {
-  if (this.searchQuery.trim()) {
-    // Navigate or filter based on searchQuery
-    console.log('Searching for:', this.searchQuery);
-    // Example: this.router.navigate(['/search'], { queryParams: { q: this.searchQuery } });
-  }
+ 
+
+
+toggleSearch(force?: boolean) {
+  this.searchActive = force !== undefined ? force : !this.searchActive;
 }
 
+onSearch() {
+  if (this.searchQuery.trim()) {
+    console.log("Searching for:", this.searchQuery);
+    // your search logic here
+  }
 
+}
 
   rightNav = [
     // { label: 'SEARCH', routerLink: '/search' },

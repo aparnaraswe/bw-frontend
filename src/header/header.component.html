@@ -27,18 +27,28 @@
     </div>
     <!-- Right options -->
 <div class="nav-right">
- <div class="search-wrapper">
-  <input 
-    type="text" 
-    placeholder="Search..." 
-    class="header-search"
-    [(ngModel)]="searchQuery"
-    (keyup.enter)="onSearch()"
-  />
-  <i class="fa fa-search search-icon"></i>
-</div>
+  <!-- Search -->
+  <div class="search-container" [class.active]="searchActive">
+    <!-- Search button / trigger -->
+    <button class="search-btn" (click)="toggleSearch()">
+      <span *ngIf="!searchActive">SEARCH</span>
+    </button>
 
+    <!-- Expanding input -->
+    <div class="search-box" *ngIf="searchActive">
+      <input 
+        type="text" 
+        placeholder="ENTER KEYWORD" 
+        class="header-search"
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+        (blur)="toggleSearch(false)"
+      />
+      <span class="arrow">→</span>
+    </div>
+  </div>
 
+  <!-- Other Nav Links -->
   <a *ngFor="let r of rightNav" 
      [routerLink]="r.routerLink" 
      class="nav-item"
@@ -46,6 +56,7 @@
     {{ r.label }}
   </a>
 </div>
+
 
 
   </nav>

@@ -1,122 +1,56 @@
-<div class="header-margin"></div>
-
 <div class="product-detail-main">
   <div class="product-container">
+    
     <!-- Product Images -->
     <div class="product-images">
-      <div class="main-image-wrapper">
-        <button class="prev-btn" onclick="prevImage()">&#10094;</button>
-        <img id="currentImage" src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Tank Top">
-        <button class="next-btn" onclick="nextImage()">&#10095;</button>
-      </div>
-      <div class="thumbnail-images">
-        <img src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Thumb" onclick="selectImage(0)">
-        <img src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Thumb" onclick="selectImage(1)">
-        <img src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Thumb" onclick="selectImage(2)">
-        <img src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Thumb" onclick="selectImage(3)">
-        <img src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop" alt="Thumb" onclick="selectImage(4)">
-      </div>
+      <img *ngFor="let img of product.images" [src]="img" alt="Product Image">
     </div>
 
-    <!-- Product Details (unchanged) -->
+    <!-- Product Details -->
     <div class="product-details">
-      <div class="product-detail-wrapper"></div>
-      <div class="brand">BW</div>
-      <div class="title">Viscose Wool Woven Tank Top</div>
-      <div class="price">Rs. 54,600</div>
+      <div class="brand">{{ product.brand }}</div>
+      <div class="title">{{ product.title }}</div>
+      <div class="price">{{ product.price }}</div>
+
+      <!-- Color & Size -->
       <div>
         <select>
-          <option>Bone</option>
+          <option *ngFor="let color of product.colors">{{ color }}</option>
         </select>
         <select>
-          <option>L</option>
-          <option>M</option>
-          <option>S</option>
+          <option *ngFor="let size of product.sizes">{{ size }}</option>
         </select>
       </div>
-    <button class="bw-btn">Add to Cart</button>
 
-<div class="description">
-  The Woven Tank Top is tailored in Italy from viscose-virgin wool blend with elastane for stretch comfort. The elevated tank style has a U-neckline, dropped armholes, and a relaxed fit in the body.
-</div>
+      <button class="bw-btn">Add to Cart</button>
 
-<div class="collapsible">
-  <h4>Details +</h4>
-  <div class="content">
-    Made in Italy. Material: Viscose/Wool/Elastane. Dry Clean Only.
-  </div>
-</div>
+      <!-- Description -->
+      <div class="description">
+        {{ product.description }}
+      </div>
 
-
-<div class="collapsible">
-  <h4>Shipping Policy +</h4>
-  <div class="content">
-    Ships within 5–7 business days. Free returns within 14 days.
-  </div>
-</div>
-
-<div class="collapsible">
-  <h4>Share +</h4>
-  <div class="content">
-    [Social Icons Here]
-  </div>
-</div>
-
-
+      <!-- Collapsible Sections -->
+      <div class="collapsible" *ngFor="let item of collapsibles" (click)="item.open = !item.open">
+        <h4>{{ item.title }}</h4>
+        <p *ngIf="item.open">{{ item.content }}</p>
+      </div>
     </div>
   </div>
 </div>
 
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const images = [
-    "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop",
-    "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop",
-    "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop",
-    "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop",
-    "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
-  ];
-
-  let currentIndex = 0;
-
-  function updateImage() {
-    document.getElementById('currentImage').src = images[currentIndex];
-  }
-
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateImage();
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateImage();
-  }
-
-  function selectImage(index) {
-    currentIndex = index;
-    updateImage();
-  }
-
-  // Collapsible sections
-  const collapsibles = document.querySelectorAll('.collapsible');
-
-  collapsibles.forEach(item => {
-    const header = item.querySelector('h4');
-
-    header.addEventListener('click', () => {
-      item.classList.toggle('active');
-      const content = item.querySelector('.content');
-      if(item.classList.contains('active')) {
-        content.style.display = 'block';
-        header.textContent = header.textContent.replace('+', '−');
-      } else {
-        content.style.display = 'none';
-        header.textContent = header.textContent.replace('−', '+');
-      }
-    });
-  });
-});
-</script>
-
+<!-- Suggestions -->
+<div class="suggestion-product-section">
+  <p>YOU MAY ALSO LIKE</p>
+  <div class="carousel-gird">
+    <div class="carousel-gird-item" *ngFor="let suggestion of suggestions">
+      <div>
+        <img [src]="suggestion.img" />
+        <div>
+          <p>{{ suggestion.brand }}</p>
+          <p>{{ suggestion.name }}</p>
+          <p>{{ suggestion.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
