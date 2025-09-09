@@ -149,8 +149,7 @@ onSearch() {
 }
 
   rightNav = [
-    // { label: 'SEARCH', routerLink: '/search' },
-    { label: 'ACCOUNT', routerLink: '/account' },
+    { label: 'ACCOUNT', routerLink: '/login' },
     { label: 'BAG', routerLink: '/cart' }
   ];
 
