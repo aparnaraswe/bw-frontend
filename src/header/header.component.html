@@ -53,13 +53,14 @@
         </div>
       </div>
 
-      <!-- Other Nav Links -->
-      <a *ngFor="let r of rightNav" 
-         [routerLink]="r.routerLink" 
-         class="nav-item"
-         routerLinkActive="active-link">
-        {{ r.label }}
-      </a>
+     <a *ngFor="let r of rightNav"
+     class="nav-item"
+     routerLinkActive="active-link"
+     (click)="r.label === 'BAG' ? openCart() : null"
+     [routerLink]="r.label !== 'BAG' ? r.routerLink : null">
+    {{ r.label }}
+  </a>
+
     </div>
   </nav>
 
@@ -83,3 +84,11 @@
     </div>
   </div>
 </header>
+
+
+
+<app-cart-popup
+  [isVisible]="cartVisible"
+  [cartItems]="cartItems"
+  (close)="cartService.hideCart()">
+</app-cart-popup>

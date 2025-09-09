@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CartService, CartItem } from '../services/cart.service';
+import { CartPopupComponent } from '../cart-popup/cart-popup.component';
 
 interface NavLink {
   label: string;
@@ -22,15 +24,31 @@ interface NavItem {
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule,RouterModule,FormsModule],
+  imports: [CommonModule,RouterModule,FormsModule,CartPopupComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  cartItems: CartItem[] = [];
+  cartVisible = false;
+
+
   selectedNav: string | null = null;
   searchQuery: string = '';
   searchActive: boolean = false;
   mobileMenuOpen = false;
+
+  constructor(public cartService: CartService) {
+    // Subscribe to cart items & visibility
+    this.cartService.cartItems$.subscribe(items => this.cartItems = items);
+    this.cartService.cartVisible$.subscribe(visible => this.cartVisible = visible);
+  }
+
+  openCart() {
+    this.cartService.showCart();
+  }
+
+
 toggleMobileMenu() {
   this.mobileMenuOpen = !this.mobileMenuOpen;
 }
@@ -150,7 +168,7 @@ onSearch() {
 
   rightNav = [
     { label: 'ACCOUNT', routerLink: '/login' },
-    { label: 'BAG', routerLink: '/cart' }
+    { label: 'BAG', action: () => this.openCart()}
   ];
 
 }

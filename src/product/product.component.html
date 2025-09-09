@@ -24,11 +24,7 @@
 
       <button class="bw-btn" (click)="addToCart()" >Add to Cart</button>
 
-      <app-cart-popup
-  [isVisible]="cartVisible"
-  [cartItems]="cartItems"
-  (close)="cartVisible = false">
-</app-cart-popup>
+      
 
       <!-- Description -->
       <div class="description">
@@ -60,3 +56,9 @@
     </div>
   </div>
 </div>
+
+<app-cart-popup
+  [isVisible]="cartVisible"
+  [cartItems]="cartItems"
+  (close)="cartService.hideCart()">
+</app-cart-popup>
