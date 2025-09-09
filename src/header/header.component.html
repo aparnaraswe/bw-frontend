@@ -1,7 +1,12 @@
 <header class="header">
   <nav class="nav">
-    <!-- Left options -->
-    <div class="nav-left">
+    <!-- Mobile Hamburger -->
+    <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      &#9776; <!-- Hamburger icon -->
+    </div>
+
+    <!-- Left options (desktop) -->
+    <div class="nav-left desktop-menu">
       <div class="nav-item dropdown"
            *ngFor="let item of navItems"
            [class.active]="selectedNav === item.label"
@@ -19,45 +24,62 @@
         </div>
       </div>
     </div>
+
     <!-- Center Logo -->
     <div class="nav-center">
       <a routerLink="/" class="brand">
         <img src="/logo-black-bw.png" alt="Brand Logo" />
       </a>
     </div>
-    <!-- Right options -->
-<div class="nav-right">
-  <!-- Search -->
-  <div class="search-container" [class.active]="searchActive">
-    <!-- Search button / trigger -->
-    <button class="search-btn" (click)="toggleSearch()">
-      <span *ngIf="!searchActive">SEARCH</span>
-    </button>
 
-    <!-- Expanding input -->
-    <div class="search-box" *ngIf="searchActive">
-      <input 
-        type="text" 
-        placeholder="ENTER KEYWORD" 
-        class="header-search"
-        [(ngModel)]="searchQuery"
-        (keyup.enter)="onSearch()"
-        (blur)="toggleSearch(false)"
-      />
-      <span class="arrow">→</span>
+    <!-- Right options -->
+    <div class="nav-right">
+      <!-- Search -->
+      <div class="search-container" [class.active]="searchActive">
+        <button class="search-btn" (click)="toggleSearch()">
+          <span *ngIf="!searchActive">SEARCH</span>
+        </button>
+
+        <div class="search-box" *ngIf="searchActive">
+          <input 
+            type="text" 
+            placeholder="ENTER KEYWORD" 
+            class="header-search"
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+            (blur)="toggleSearch(false)"
+          />
+          <span class="arrow">→</span>
+        </div>
+      </div>
+
+      <!-- Other Nav Links -->
+      <a *ngFor="let r of rightNav" 
+         [routerLink]="r.routerLink" 
+         class="nav-item"
+         routerLinkActive="active-link">
+        {{ r.label }}
+      </a>
+    </div>
+  </nav>
+
+  <!-- Mobile Slide-Out Menu -->
+  <div class="mobile-menu" [class.open]="mobileMenuOpen">
+    <button class="close-btn" (click)="toggleMobileMenu()">✕</button>
+    <div class="mobile-links">
+      <div class="mobile-item" *ngFor="let item of navItems">
+        <span>{{ item.label }}</span>
+        <div class="mobile-dropdown" *ngIf="item.dropdown">
+          <div *ngFor="let column of item.dropdown">
+            <h4>{{ column.title }}</h4>
+            <a *ngFor="let link of column.links"
+               [routerLink]="link.routerLink"
+               (click)="toggleMobileMenu()">
+              {{ link.label }}
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Other Nav Links -->
-  <a *ngFor="let r of rightNav" 
-     [routerLink]="r.routerLink" 
-     class="nav-item"
-     routerLinkActive="active-link">
-    {{ r.label }}
-  </a>
-</div>
-
-
-
-  </nav>
 </header>

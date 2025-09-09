@@ -30,6 +30,11 @@ export class HeaderComponent {
   selectedNav: string | null = null;
   searchQuery: string = '';
   searchActive: boolean = false;
+  mobileMenuOpen = false;
+toggleMobileMenu() {
+  this.mobileMenuOpen = !this.mobileMenuOpen;
+}
+
 
 
   navItems: NavItem[] = [

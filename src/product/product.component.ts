@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CartPopupComponent } from '../cart-popup/cart-popup.component';
 
 interface Product {
   brand: string;
@@ -22,11 +23,28 @@ interface Suggestion {
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule,RouterModule,FormsModule],
+  imports: [CommonModule,RouterModule,FormsModule,CartPopupComponent],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
+cartVisible = false;
+cartItems: any[] = [];
+
+addToCart() {
+  const item = {
+    name: this.product.title,
+    img: this.product.images[0],
+    price: this.product.price,
+    qty: 1,
+    color: this.product.colors[0],
+    size: this.product.sizes[0]
+  };
+
+  this.cartItems.push(item);
+  this.cartVisible = true;
+}
+
 
   // Main Product
   product: Product = {
