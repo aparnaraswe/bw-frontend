@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -31,6 +31,7 @@ interface NavItem {
 export class HeaderComponent {
   cartItems: CartItem[] = [];
   cartVisible = false;
+  isShrunk = false;
 
 
   selectedNav: string | null = null;
@@ -170,5 +171,15 @@ onSearch() {
     { label: 'ACCOUNT', routerLink: '/login' },
     { label: 'BAG', action: () => this.openCart()}
   ];
+
+  get cartCount(): number {
+    return this.cartItems.reduce((sum, i) => sum + (i.qty || 1), 0);
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    const threshold = 20;
+    this.isShrunk = (window.scrollY || document.documentElement.scrollTop || 0) > threshold;
+  }
 
 }

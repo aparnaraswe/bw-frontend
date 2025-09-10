@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [class.shrink]="isShrunk">
   <nav class="nav">
     <!-- Mobile Hamburger -->
     <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
@@ -58,13 +58,17 @@
      routerLinkActive="active-link"
      (click)="r.label === 'BAG' ? openCart() : null"
      [routerLink]="r.label !== 'BAG' ? r.routerLink : null">
-    {{ r.label }}
+    <ng-container *ngIf="r.label === 'BAG'; else normalLink">
+      BAG <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+    </ng-container>
+    <ng-template #normalLink>{{ r.label }}</ng-template>
   </a>
 
     </div>
   </nav>
 
   <!-- Mobile Slide-Out Menu -->
+  <div class="mobile-backdrop" *ngIf="mobileMenuOpen" (click)="toggleMobileMenu()"></div>
   <div class="mobile-menu" [class.open]="mobileMenuOpen">
     <button class="close-btn" (click)="toggleMobileMenu()">✕</button>
     <div class="mobile-links">

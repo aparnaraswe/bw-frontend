@@ -82,6 +82,10 @@ select {
   margin: 20px 0;
 }
 
+.bw-btn:hover {
+  opacity: .9;
+}
+
 /* Product description */
 .description {
   font-size: 14px;

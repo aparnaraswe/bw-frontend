@@ -3,12 +3,22 @@
   width: 100%;
   /* border-bottom: 1px solid #eee; */
   background: #fff;
-  font-family: 'math';
-  letter-spacing: 1px;
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.2px;
   position: relative;
   z-index: 100;
   position: fixed
 }
+
+.header {
+  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+}
+
+/* Shrink on scroll */
+.header .nav { transition: padding .25s ease; }
+.header.shrink .nav { padding: 8px 24px; }
+.header .brand img { transition: height .25s ease, transform .25s ease; }
+.header.shrink .brand img { height: 28px; }
 
 
 /* Navbar flex layout */
@@ -36,22 +46,22 @@
 }
 
 .brand img {
-  height: 38px;
+  height: 34px;
   object-fit: contain;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 .brand img:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) rotate(.2deg);
 }
 
 /* Nav items */
 .nav-item,
 .main-link {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
-  color: #000;
+  color: #111;
   text-decoration: none;
   /* position: relative; */
   padding: 15px 0;
@@ -61,7 +71,7 @@
 
 .nav-item:hover,
 .main-link:hover {
-  color: #444;
+  color: #000;
 }
 /* Instead of targeting a:hover */
 .nav-item:hover,
@@ -73,18 +83,20 @@
 .nav-item::after {
   content: "";
   position: absolute;
-  bottom: -4px;
+  bottom: -6px;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 2px;
-  background: black;
-  transition: width 0.3s ease;
+  background: #000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 /* Expand underline when hovering anywhere on nav-item */
 .nav-item:hover::after,
 .nav-item.active::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 
 /* Hover underline animation */
@@ -291,6 +303,16 @@ a.active-link::after {
 .nav-right .nav-item {
   padding: 0 10px;
 }
+
+/* Light search styling */
+.search-container .header-search {
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #111;
+}
+
+.search-btn {
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 @media (max-width: 768px) {
   .header-search {
     width: 120px;
@@ -484,6 +506,13 @@ a.active-link::after {
   padding: 20px;
 }
 
+.mobile-links a,
+.mobile-links span,
+.dropdown-column h4,
+.dropdown-column a {
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
 .mobile-menu.open {
   left: 0;
 }
@@ -507,6 +536,29 @@ a.active-link::after {
   text-decoration: none;
   color: #000;
   font-size: 14px;
+}
+
+/* Mobile backdrop */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.3);
+  z-index: 1500;
+}
+
+/* Cart badge */
+.cart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: #111;
+  color: #fff;
+  font-size: 11px;
+  margin-left: 6px;
 }
 
 /* Responsive rules */

@@ -1,3 +1,11 @@
+<!-- Announcement Bar -->
+<div class="announcement">
+  <div class="container">
+    <span>{{ announcement.text }}</span>
+    <a [routerLink]="announcement.link">{{ announcement.linkText }}</a>
+  </div>
+  </div>
+
 <!-- Hero Section -->
 <section class="hero">
   <div class="hero-content">
@@ -5,14 +13,23 @@
       <img [src]="hero.image" alt="Hero Image" />
       <div class="hero-overlay">
         <div class="hero-text">
-          <p>{{ hero.title }}</p>
-          <p>{{ hero.subtitle }}</p>
+          <h1>{{ hero.title }}</h1>
+          <p class="sub">{{ hero.subtitle }}</p>
           <button class="shop-btn">{{ hero.buttonText }}</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Trending -->
+<!-- <section class="trending">
+  <div class="container">
+    <div class="trending-strip">
+      <span *ngFor="let t of trending">#{{ t.label }}</span>
+    </div>
+  </div>
+</section> -->
 
 <!-- Featured Products -->
 <section class="featured-products">
@@ -23,12 +40,12 @@
         <div class="product-image">
           <img [src]="product.image" [alt]="product.name" />
           <div class="product-overlay">
-            <button class="quick-view">QUICK VIEW</button>
+            <button class="quick-view" (click)="openQuickView(product)">QUICK VIEW</button>
           </div>
         </div>
         <div class="product-info">
           <p>{{ product.name }}</p>
-          <p >{{ product.price }}</p>
+          <p class="price">{{ product.price }}</p>
         </div>
       </div>
     </div>
