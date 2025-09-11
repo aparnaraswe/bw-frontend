@@ -13,7 +13,7 @@
 
 /* Hero */
 .hero {
-  margin-top: 80px;
+  margin-top: 0px;
   min-height: 90vh;
   position: relative;
 }
@@ -48,7 +48,7 @@
 }
 
 .hero-text h1 { font-size: 42px; font-weight: 600; letter-spacing: .5px; }
-.hero-text .sub { margin-top: 8px; font-size: 16px; color: #eaeaea; }
+.hero-text .sub { margin-top: 8px; font-size: 16px; color: black; }
 
 .shop-btn {
   margin-top: 18px;
@@ -203,5 +203,504 @@
 @media (max-width: 768px) {
   .ig-grid { grid-template-columns: repeat(2, 1fr); }
   .cta-wrap { flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* Optional: enhance scroll animations */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero parallax effect */
+.hero-image img {
+  transition: transform 0.5s ease-out;
+}
+
+/* Optional: subtle hover + scroll effect for product cards */
+.product-card {
+  will-change: transform, opacity;
+}
+/* Hero overlay parallax effect on scroll */
+.hero-overlay {
+  transition: transform 0.5s ease-out;
+}
+
+[data-aos="zoom-in"] {
+  transform: scale(0.95);
+}
+
+[data-aos].aos-animate[data-aos="zoom-in"] {
+  transform: scale(1);
+}
+
+/* Product hover effect */
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.product-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Collection hover */
+.collection-item:hover img {
+  transform: scale(1.08);
+}
+
+.collection-item:hover .collection-btn {
+  background: #111;
+  color: #fff;
+}
+
+
+
+
+/* Animation Variables */
+:root {
+  --animation-slow: 1.2s;
+  --animation-medium: 0.8s;
+  --animation-fast: 0.4s;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --primary-color: #000;
+  --accent-color: #d4a373;
+  --text-color: #333;
+  --bg-color: #fff;
+  --overlay-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Global Animation Styles */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s var(--ease-out-expo) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Split Text Animation for Headlines */
+.split-text {
+  overflow: hidden;
+  position: relative;
+}
+
+.split-text::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(100%);
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.split-text.aos-animate::before {
+  transform: translateY(0);
+}
+
+/* Reveal Text Animation */
+.reveal-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color);
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform 1s var(--ease-out-expo);
+}
+
+.reveal-text.aos-animate::after {
+  transform: scaleX(0);
+}
+
+/* Announcement Bar */
+.announcement-bar {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.announcement-bar:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.announcement-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.announcement-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s var(--ease-in-out-quad);
+}
+
+.announcement-link:hover::after {
+  width: 100%;
+}
+
+/* Hero Section with Parallax */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-bg {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+
+.hero-overlay {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s var(--ease-out-expo);
+}
+
+.hero.aos-animate .hero-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animated Button */
+.animated-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animated-btn .btn-icon {
+  margin-left: 8px;
+  transform: translateX(-5px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.animated-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.animated-btn:hover .btn-icon {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.animated-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: inherit;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.animated-btn:hover::after {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 1;
+}
+
+/* Featured Products */
+.stagger-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+  will-change: transform, box-shadow;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img {
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.product-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.quick-view {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: bottom 0.5s var(--ease-out-expo), background-color 0.3s ease;
+  opacity: 0;
+}
+
+.product-card:hover .quick-view {
+  bottom: 20px;
+  opacity: 1;
+}
+
+.btn-hover-text {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.quick-view:hover .btn-hover-text {
+  transform: translateY(-3px);
+}
+
+/* Collections */
+.collection-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.collection-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.collection-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-out-expo);
+}
+
+.collection-item:hover .collection-image {
+  transform: scale(1.05);
+}
+
+.collection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out-expo);
+}
+
+.collection-item:hover .collection-overlay {
+  opacity: 1;
+}
+
+.collection-text {
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.collection-item:hover .collection-text {
+  transform: translateY(0);
+}
+
+.collection-title {
+  margin-bottom: 15px;
+  position: relative;position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 25px;
+}
+
+.collection-btn .btn-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: width 0.4s var(--ease-out-expo);
+}
+
+.collection-btn:hover .btn-line {
+  width: 100%;
+}
+
+.collection-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Newsletter */
+.newsletter {
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  z-index: -1;
+}
+
+.newsletter-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 70%);
+  animation: pulse 15s infinite linear;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5%, 5%);
+  }
+  50% {
+    transform: translate(0, 10%);
+  }
+  75% {
+    transform: translate(-5%, 5%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.newsletter-title, .newsletter-subtitle {
+  text-align: center;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-wrapper {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.newsletter-input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.newsletter-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.2);
+}
+
+.newsletter-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.ripple-btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
 }
 

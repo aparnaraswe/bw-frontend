@@ -583,13 +583,13 @@ h1, h2, h3, .section-title, .collection-text h3 {
     text-align: center;
   }
 }
-html, body {
+/* html, body {
   margin: 0;
   padding: 0;
-  background-color: #fff;   /* <-- set to white */
+  background-color: #fff;   
   font-family: Arial, sans-serif;
   color: #000;
-}
+} */
 
 
 /* Dropdown wrapper */
@@ -667,3 +667,35 @@ html, body {
 
 
 
+/* Hero overlay parallax effect on scroll */
+.hero-overlay {
+  transition: transform 0.5s ease-out;
+}
+
+[data-aos="zoom-in"] {
+  transform: scale(0.95);
+}
+
+[data-aos].aos-animate[data-aos="zoom-in"] {
+  transform: scale(1);
+}
+
+/* Product hover effect */
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.product-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Collection hover */
+.collection-item:hover img {
+  transform: scale(1.08);
+}
+
+.collection-item:hover .collection-btn {
+  background: #111;
+  color: #fff;
+}

@@ -1,50 +1,48 @@
-<!-- Announcement Bar -->
-<div class="announcement">
+<header class="announcement-bar" data-aos="slide-down" data-aos-duration="800" data-aos-easing="ease-out-cubic">
   <div class="container">
-    <span>{{ announcement.text }}</span>
-    <a [routerLink]="announcement.link">{{ announcement.linkText }}</a>
+    <span class="announcement-text" data-aos="fade-right" data-aos-delay="200">{{ announcement.text }}</span>
+    <a [routerLink]="announcement.link" class="announcement-link" data-aos="fade-left" data-aos-delay="400">{{ announcement.linkText }}</a>
   </div>
-  </div>
+</header>
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero parallax-container">
   <div class="hero-content">
-    <div class="hero-image">
-      <img [src]="hero.image" alt="Hero Image" />
+    <div class="hero-image" data-aos="fade" data-aos-duration="1500">
+      <img [src]="hero.image" alt="Hero Image" class="parallax-bg"/>
       <div class="hero-overlay">
         <div class="hero-text">
-          <h1>{{ hero.title }}</h1>
-          <p class="sub">{{ hero.subtitle }}</p>
-          <button class="shop-btn">{{ hero.buttonText }}</button>
+          <h1 class="split-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">{{ hero.title }}</h1>
+          <p class="sub split-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">{{ hero.subtitle }}</p>
+          <button class="shop-btn animated-btn" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="800">
+            <span class="btn-text">{{ hero.buttonText }}</span>
+            <span class="btn-icon">→</span>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Trending -->
-<!-- <section class="trending">
-  <div class="container">
-    <div class="trending-strip">
-      <span *ngFor="let t of trending">#{{ t.label }}</span>
-    </div>
-  </div>
-</section> -->
-
 <!-- Featured Products -->
 <section class="featured-products">
   <div class="container">
-    <h2 class="section-title">FEATURED</h2>
-    <div class="products-grid">
-      <div class="product-card" *ngFor="let product of featuredProducts">
+    <h2 class="section-title reveal-text" data-aos="fade-right" data-aos-duration="1000">FEATURED</h2>
+    <div class="products-grid stagger-grid">
+      <div class="product-card stagger-item" *ngFor="let product of featuredProducts; let i = index" 
+           [attr.data-aos]="'fade-up'" 
+           [attr.data-aos-delay]="100 * i" 
+           [attr.data-aos-duration]="800">
         <div class="product-image">
-          <img [src]="product.image" [alt]="product.name" />
+          <img [src]="product.image" [alt]="product.name" class="product-img" />
           <div class="product-overlay">
-            <button class="quick-view" (click)="openQuickView(product)">QUICK VIEW</button>
+            <button class="quick-view" (click)="openQuickView(product)">
+              <span class="btn-hover-text">QUICK VIEW</span>
+            </button>
           </div>
         </div>
         <div class="product-info">
-          <p>{{ product.name }}</p>
+          <p class="product-name">{{ product.name }}</p>
           <p class="price">{{ product.price }}</p>
         </div>
       </div>
@@ -55,12 +53,21 @@
 <!-- Collections -->
 <section class="collections">
   <div class="collections-grid">
-    <div *ngFor="let col of collections" [ngClass]="col.size === 'large' ? 'collection-item large' : 'collection-item'">
-      <img [src]="col.image" [alt]="col.title" />
-      <div class="collection-overlay">
-        <div class="collection-text">
-          <h3>{{ col.title }}</h3>
-          <button class="collection-btn">{{ col.buttonText }}</button>
+    <div *ngFor="let col of collections; let i = index" 
+         [ngClass]="col.size === 'large' ? 'collection-item large' : 'collection-item'" 
+         [attr.data-aos]="'fade-up'" 
+         [attr.data-aos-delay]="150 * i"
+         [attr.data-aos-duration]="1000">
+      <div class="collection-image-container">
+        <img [src]="col.image" [alt]="col.title" class="collection-image" />
+        <div class="collection-overlay">
+          <div class="collection-text">
+            <h3 class="collection-title" data-aos="fade-up" data-aos-anchor=".collection-item" data-aos-delay="200">{{ col.title }}</h3>
+            <button class="collection-btn" data-aos="fade-up" data-aos-anchor=".collection-item" data-aos-delay="400">
+              <span class="btn-text">{{ col.buttonText }}</span>
+              <span class="btn-line"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -68,14 +75,19 @@
 </section>
 
 <!-- Newsletter -->
-<section class="newsletter">
+<section class="newsletter" data-aos="fade-up" data-aos-duration="1200">
+  <div class="newsletter-bg"></div>
   <div class="container">
     <div class="newsletter-content">
-      <h2>{{ newsletter.title }}</h2>
-      <p>{{ newsletter.subtitle }}</p>
-      <form class="newsletter-form">
-        <input type="email" [placeholder]="newsletter.placeholder" />
-        <button type="submit">{{ newsletter.buttonText }}</button>
+      <h2 class="newsletter-title reveal-text" data-aos="fade-up" data-aos-delay="200">{{ newsletter.title }}</h2>
+      <p class="newsletter-subtitle" data-aos="fade-up" data-aos-delay="400">{{ newsletter.subtitle }}</p>
+      <form class="newsletter-form" data-aos="fade-up" data-aos-delay="600">
+        <div class="input-wrapper" data-aos="fade-right" data-aos-delay="700">
+          <input type="email" [placeholder]="newsletter.placeholder" class="newsletter-input" />
+        </div>
+        <button type="submit" class="newsletter-btn ripple-btn" data-aos="fade-left" data-aos-delay="800">
+          <span>{{ newsletter.buttonText }}</span>
+        </button>
       </form>
     </div>
   </div>

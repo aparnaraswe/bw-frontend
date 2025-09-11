@@ -1,20 +1,107 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService, CartItem } from '../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import * as AOS from 'aos';
+import Lenis from '@studio-freight/lenis';
 
 @Component({
   selector: 'app-home',
-  // standalone: true,
-  imports: [CommonModule,FormsModule,RouterModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  private lenis!: Lenis;
+  private animationFrameId!: number;
+
+  constructor(public cartService: CartService) {}
+
+  ngOnInit() {
+    // Initialize AOS (scroll animations)
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: false,
+      mirror: true,
+      anchorPlacement: 'top-bottom',
+      startEvent: 'DOMContentLoaded',
+      disable: 'mobile'
+    });
+  }
+
+  ngAfterViewInit() {
+    // Initialize Lenis smooth scrolling
+    this.lenis = new Lenis({
+      duration: 1.2, // adjust smoothness
+      easing: (t: number) => 1 - Math.pow(1 - t, 3), // custom easing
+      smoothWheel: true,
+      // smoothTouch: false
+    });
+
+    const raf = (time: number) => {
+      this.lenis.raf(time);
+      this.animationFrameId = requestAnimationFrame(raf);
+    };
+    this.animationFrameId = requestAnimationFrame(raf);
+
+    // Parallax effect for hero section
+    const parallaxBg = document.querySelector<HTMLElement>('.parallax-bg');
+    if (parallaxBg) {
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        parallaxBg.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+      });
+    }
+
+    // Staggered animations
+    const staggerItems = document.querySelectorAll<HTMLElement>('.stagger-item');
+    staggerItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    // Split text effect
+    const splitTextElements = document.querySelectorAll<HTMLElement>('.split-text');
+    splitTextElements.forEach(element => {
+      const text = element.textContent;
+      if (text) element.setAttribute('data-text', text);
+    });
+
+    // Ripple button effect
+    const buttons = document.querySelectorAll<HTMLElement>('.ripple-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', function (e: MouseEvent) {
+        const target = e.currentTarget as HTMLElement;
+        const rect = target.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        target.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.lenis) {
+      this.lenis.destroy();
+    }
+  }
+
+  // ====== UI Data ======
+
   isMobileMenuOpen = false;
 
-  // Hero Section
   hero = {
     image: '/bg-1.png',
     title: 'NEW SEASON — MINIMAL ESSENTIALS',
@@ -22,7 +109,6 @@ export class HomeComponent {
     buttonText: 'SHOP NOW'
   };
 
-  // Featured Products
   featuredProducts = [
     { name: 'Oversized Hoodie', price: '$195', image: '/cart1.jpg' },
     { name: 'Minimal Sneaker', price: '$395', image: '/cart2.jpg' },
@@ -30,35 +116,24 @@ export class HomeComponent {
     { name: 'Everyday Tee', price: '$125', image: '/category1.png' }
   ];
 
-  // Categories (static)
-  categories = [
-    { title: 'NEW IN', image: '/category1.png' },
-    { title: 'MEN', image: '/category2.png' },
-    { title: 'WOMEN', image: '/category3.png' },
-    { title: 'ACCESSORIES', image: '/cart2.jpg' }
+  collections = [
+    { title: "MEN'S", image: '/category1.png', size: 'large', buttonText: 'EXPLORE' },
+    { title: "WOMEN'S", image: '/category2.png', size: 'small', buttonText: 'EXPLORE' },
+    { title: "ACCESSORIES", image: '/category3.png', size: 'small', buttonText: 'EXPLORE' }
   ];
 
-  // Brand USPs (static)
-  usps = [
-    { title: 'Free Shipping', subtitle: 'On orders over $150' },
-    { title: 'Easy Returns', subtitle: '30-day return window' },
-    { title: 'Secure Checkout', subtitle: 'Protected payments' },
-    { title: 'Premium Quality', subtitle: 'Crafted to last' }
-  ];
+  newsletter = {
+    title: 'STAY UPDATED',
+    subtitle: 'Subscribe to receive updates on new arrivals and exclusive offers',
+    placeholder: 'Enter your email',
+    buttonText: 'SUBSCRIBE'
+  };
 
-  // Lookbook (static)
-  lookbook = [
-    { image: '/cart1.jpg', caption: 'Street Essentials' },
-    { image: '/colllection-img.png', caption: 'Minimal Layers' },
-    { image: '/ED1SP25_M30019_900x.png', caption: 'Monochrome Fit' }
-  ];
-
-  // Testimonials (static)
-  testimonials = [
-    { quote: 'The fit and finish are unmatched. My go-to brand now.', author: 'Aarav • Mumbai' },
-    { quote: 'Effortless style. Every piece feels premium.', author: 'Sara • Delhi' },
-    { quote: 'Love the minimal aesthetic and quality fabrics.', author: 'Kabir • Bengaluru' }
-  ];
+  announcement = {
+    text: 'FREE SHIPPING OVER $150 • NEW COLLECTION NOW LIVE',
+    linkText: 'SHOP NOW',
+    link: '/collection'
+  };
 
   // Quick View modal state
   quickViewOpen = false;
@@ -78,10 +153,9 @@ export class HomeComponent {
     this.selectedProduct = null;
   }
 
-  constructor(public cartService: CartService) {}
-
   addQuickViewToBag() {
-    if (!this.selectedProduct) { return; }
+    if (!this.selectedProduct) return;
+
     const item: CartItem = {
       name: this.selectedProduct.name,
       img: this.selectedProduct.image,
@@ -93,57 +167,4 @@ export class HomeComponent {
     this.cartService.addToCart(item);
     this.closeQuickView();
   }
-
-  // Collections
-  collections = [
-    {
-      title: "MEN'S",
-      image: '/category1.png',
-      size: 'large',
-      buttonText: 'EXPLORE'
-    },
-    {
-      title: "WOMEN'S",
-      image: '/category2.png',
-      size: 'small',
-      buttonText: 'EXPLORE'
-    },
-    {
-      title: "ACCESSORIES",
-      image: '/category3.png',
-      size: 'small',
-      buttonText: 'EXPLORE'
-    }
-  ];
-
-  // Newsletter
-  newsletter = {
-    title: 'STAY UPDATED',
-    subtitle: 'Subscribe to receive updates on new arrivals and exclusive offers',
-    placeholder: 'Enter your email',
-    buttonText: 'SUBSCRIBE'
-  };
-
-  // Announcement bar (static)
-  announcement = {
-    text: 'FREE SHIPPING OVER $150 • NEW COLLECTION NOW LIVE',
-    linkText: 'SHOP NOW',
-    link: '/collection'
-  };
-
-  // Trending (static)
-  trending = [
-    { label: 'CO-ORD SETS' },
-    { label: 'OVERSIZED TEES' },
-    { label: 'MONOCHROME' },
-    { label: 'ATHLEISURE' },
-    { label: 'KNITWEAR' }
-  ];
-
-  // Brand story (static)
-  brandStory = {
-    title: 'CRAFTED FOR THE MODERN MINIMALIST',
-    copy: 'BW blends contemporary silhouettes with premium materials. Designed for everyday utility with elevated details.',
-    image: '/frame_3.png'
-  };
 }
