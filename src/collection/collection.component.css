@@ -77,8 +77,25 @@
 }
 
 header, .header {
-  position: sticky; /* only if you already use sticky */
+  position: sticky;
   top: 0;
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .collection-main { width: 90%; padding: 16px; }
+  .collection-grid { gap: 30px 16px; }
+}
+
+@media (max-width: 768px) {
+  .collection-main { width: 95%; padding: 12px; }
+  .collection-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
+  .header-margin { height: 80px; }
+}
+
+@media (max-width: 480px) {
+  .collection-grid { grid-template-columns: 1fr; gap: 16px; }
+  .header-margin { height: 70px; }
 }

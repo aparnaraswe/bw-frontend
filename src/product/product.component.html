@@ -26,8 +26,6 @@
 
       <button class="bw-btn" (click)="addToCart()" >Add to Cart</button>
 
-      
-
       <!-- Description -->
       <div class="description">
         {{ product.description }}
@@ -45,8 +43,8 @@
 <!-- Suggestions -->
 <div class="suggestion-product-section">
   <p>YOU MAY ALSO LIKE</p>
-  <div class="carousel-gird">
-    <div class="carousel-gird-item" *ngFor="let suggestion of suggestions">
+  <div class="carousel-gird" #suggestSlider (mouseenter)="pauseSuggest()" (mouseleave)="resumeSuggest()">
+    <div class="carousel-gird-item" *ngFor="let suggestion of suggestions; let i = index">
       <div>
         <img [src]="suggestion.img" />
         <div>
@@ -56,6 +54,13 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="carousel-nav">
+    <button class="carousel-btn" (click)="scrollSuggest('prev')">Prev</button>
+    <div class="dots">
+      <span *ngFor="let s of suggestions; let i = index" [class.active]="i === suggestIndex" (click)="goToSuggest(i)"></span>
+    </div>
+    <button class="carousel-btn" (click)="scrollSuggest('next')">Next</button>
   </div>
 </div>
 

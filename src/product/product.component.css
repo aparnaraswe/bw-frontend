@@ -141,17 +141,26 @@ select {
   -webkit-overflow-scrolling: touch;
   overflow-y: hidden;
 }
+.carousel-gird::-webkit-scrollbar { height: 6px; }
+.carousel-gird::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+.carousel-gird-item { flex: 0 0 auto; scroll-snap-align: start; width: 25%; background-color: #f9f9f9; overflow: hidden; }
 
-.carousel-gird::-webkit-scrollbar {
-  display: none;
+/* Nav buttons (optional, can be wired later) */
+.carousel-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
 }
-
-.carousel-gird-item {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  width: 25%;
-  background-color: #f9f9f9;
-  overflow: hidden;
+.carousel-btn {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 8px 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .carousel-gird-item > div {
@@ -178,16 +187,33 @@ select {
 
 /* Tablet */
 @media (max-width: 992px) {
-  .carousel-gird-item {
-    width: 50%;
-  }
+  .carousel-gird-item { width: 50%; }
 }
 
-/* Mobile */
-@media (max-width: 576px) {
-  .carousel-gird-item {
-    width: 50%;
-  }
+/* Responsive */
+@media (max-width: 1024px) {
+  .product-detail-main { width: 95%; }
+  .product-container { flex-direction: column; gap: 20px; }
+  .product-container .product-images { width: 100%; margin-left: 0; }
+  .product-container .product-details { width: 100%; padding-left: 0; }
+}
+
+@media (max-width: 768px) {
+  .product-detail-main { width: 98%; }
+  .product-container { padding-bottom: 40px; }
+  .product-images img { width: 100%; }
+  .suggestion-product-section { width: 95%; padding: 16px; }
+  .carousel-gird-item { width: 50%; }
+  .title { font-size: 20px; }
+  .price { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .carousel-gird-item { width: 100%; }
+  .title { font-size: 18px; }
+  .bw-btn { padding: 12px 20px; font-size: 12px; }
+  .product-detail-main { width: 100%; }
+  .suggestion-product-section { width: 100%; padding: 12px; }
 }
 .header-margin{
     width: 100%;

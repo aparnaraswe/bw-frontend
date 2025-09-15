@@ -224,15 +224,32 @@ a.active-link::after {
 }
 
 /* 📱 Responsive Rules */
+@media (max-width: 1024px) {
+  .nav { padding: 12px 20px; }
+  .nav-left, .nav-right { gap: 20px; }
+  .dropdown-content { padding: 20px 40px; gap: 40px; }
+}
+
 @media (max-width: 992px) {
-  .nav-left { display: none; }   /* hide desktop nav */
+  .nav-left { display: none; }
   .mobile-menu-toggle { display: block; }
   .search-box { margin-left: 8px; }
 }
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
   .nav { padding: 10px 16px; }
+  .nav-right { gap: 16px; }
+  .brand img { height: 28px; }
   .header-search { width: 120px; }
   .header-search:focus { width: 150px; }
-  .nav-right { gap: 12px; }
-  .brand img { height: 28px; }
+  .nav-item, .main-link { font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .nav { padding: 8px 12px; }
+  .brand img { height: 24px; }
+  .header-search { width: 100px; }
+  .header-search:focus { width: 120px; }
+  .nav-item, .main-link { font-size: 11px; }
+  .mobile-menu { width: 85%; }
 }

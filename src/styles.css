@@ -19,9 +19,10 @@ h1, h2, h3, .section-title, .collection-text h3 {
 }
 
 .container {
-  width: 1400px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 
 /* Header */
@@ -698,4 +699,25 @@ h1, h2, h3, .section-title, .collection-text h3 {
 .collection-item:hover .collection-btn {
   background: #111;
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 12px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 10px; }
+}
+
+/* Animation Variables */
+:root {
+  --animation-slow: 1.2s;
+  --animation-medium: 0.8s;
+  --animation-fast: 0.4s;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --primary-color: #000;
+  --accent-color: #d4a373;
+  --text-color: #333;
+  --bg-color: #fff;
+  --overlay-color: rgba(0, 0, 0, 0.4);
 }

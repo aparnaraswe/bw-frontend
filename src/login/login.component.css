@@ -97,18 +97,16 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .login-main { padding: 16px; }
+  .login-sub { padding: 32px 24px; }
+  .login-container h2 { font-size: 18px; }
+}
+
 @media (max-width: 576px) {
-  .login-sub {
-    padding: 30px 20px;
-  }
-
-  .login-container h2 {
-    font-size: 18px;
-  }
-
-  .form-control,
-  .login-btn {
-    font-size: 13px;
-    padding: 12px;
-  }
+  .login-main { padding: 12px; }
+  .login-sub { padding: 24px 16px; }
+  .login-container h2 { font-size: 16px; margin-bottom: 20px; }
+  .form-control, .login-btn { font-size: 13px; padding: 12px; }
+  .forgot { font-size: 11px; }
 }
