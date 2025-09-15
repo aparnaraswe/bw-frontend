@@ -1064,3 +1064,181 @@
   .newsletter-subtitle { font-size: 13px; }
   .brand-gallery img { height: 140px; }
 }
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.collection-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.collection-item.large {
+  grid-row: span 2;
+}
+
+.collection-image-container {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.collection-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.collection-item:hover .collection-image {
+  transform: scale(1.05);
+}
+
+.collection-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.collection-item:hover .collection-overlay {
+  opacity: 1;
+}
+
+.collection-text {
+  text-align: center;
+  color: #fff;
+  transform: translateY(20px);
+  transition: transform 0.5s ease;
+}
+
+.collection-item:hover .collection-text {
+  transform: translateY(0);
+}
+
+.collection-btn {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.collection-item:hover .collection-btn {
+  background: #fff;
+  color: #111;
+}
+
+/* Horizontal slider for tablets/mobile */
+@media (max-width: 900px) {
+  .collections-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 80%;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .collection-item {
+    scroll-snap-align: center;
+  }
+
+  .collection-item.large {
+    grid-row: auto;
+  }
+}
+@media (max-width: 480px) {
+  .collections-grid {
+    grid-auto-columns: 90%;
+    gap: 10px;
+    padding: 0 10px;
+  }
+}
+/* Desktop: normal grid with large item */
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.collection-item.large {
+  grid-row: span 2; /* keep large item spanning two rows */
+}
+
+/* Image container */
+.collection-image-container {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.collection-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* Horizontal slider for tablets/mobile */
+@media (max-width: 900px) {
+  .collections-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 80%;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .collection-item {
+    scroll-snap-align: center;
+  }
+
+  .collection-item.large {
+    grid-row: auto; /* large item behaves like normal item on mobile */
+  }
+
+  /* Make images scale correctly */
+  .collection-image-container {
+    aspect-ratio: auto; /* remove fixed ratio */
+    height: auto;
+  }
+
+  .collection-image {
+    width: 100%;
+    height: auto; /* scale naturally */
+  }
+}
+
+@media (max-width: 480px) {
+  .collections-grid {
+    grid-auto-columns: 90%;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .collection-image-container {
+    height: auto;
+  }
+
+  .collection-image {
+    height: auto;
+    width: 100%;
+  }
+}
