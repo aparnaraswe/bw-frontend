@@ -13,10 +13,14 @@ export class CartPopupComponent {
   @Output() close = new EventEmitter<void>();
 
 
+get subtotal(): number {
+    return this.cartItems.reduce((sum, item) => 
+        sum + parseFloat(item.price) * item.qty, 0
+    );
+        
 
-  get subtotal(): number {
-    return this.cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
-  }
+}
+
 
   closePopup() {
     this.close.emit();

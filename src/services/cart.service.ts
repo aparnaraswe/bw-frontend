@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface CartItem {
   name: string;
   img: string;
-  price: string;
+  price: number;
   qty: number;
   color: string;
   size: string;

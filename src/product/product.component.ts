@@ -19,7 +19,7 @@ interface Suggestion {
   img: string;
   brand: string;
   name: string;
-  price: string;
+  price: number;
 }
 
 @Component({
@@ -50,7 +50,7 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
 product = {
     brand: 'BW',
     title: 'Viscose Wool Woven Tank Top',
-    price: 'Rs. 54,600',
+    price: 54600,
     description: `The Woven Tank Top is tailored in Italy...`,
     images: ['ED1SP25_M30019_900x.png'],
     colors: ['Bone'],
@@ -61,21 +61,20 @@ addToCart() {
     const item: CartItem = {
       name: this.product.title,
       img: this.product.images[0],
-      price: this.product.price,
+      price: Number(this.product.price),
       qty: 1,
       color: this.product.colors[0],
       size: this.product.sizes[0]
     };
-
     this.cartService.addToCart(item); // ✅ This triggers popup to open
   }
 
   // Suggestion Products
   suggestions: Suggestion[] = [
-    { img: 'category1.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 'Rs. 500' },
-    { img: 'category2.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 'Rs. 500' },
-    { img: 'category3.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 'Rs. 500' },
-    { img: 'category1.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 'Rs. 500' }
+    { img: 'category1.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 500 },
+    { img: 'category2.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 500 },
+    { img: 'category3.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 500 },
+    { img: 'category1.png', brand: 'Natura Edition', name: 'Classic Oversized', price: 500 }
   ];
 
   collapsibles = [

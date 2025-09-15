@@ -18,6 +18,7 @@ interface NavColumn {
 interface NavItem {
   label: string;
   dropdown?: NavColumn[];
+  expanded?  : boolean
 }
 
 
@@ -38,6 +39,7 @@ export class HeaderComponent {
   searchQuery: string = '';
   searchActive: boolean = false;
   mobileMenuOpen = false;
+  
 
   constructor(public cartService: CartService) {
     // Subscribe to cart items & visibility
@@ -161,7 +163,6 @@ toggleSearch(force?: boolean) {
 
 onSearch() {
   if (this.searchQuery.trim()) {
-    console.log("Searching for:", this.searchQuery);
     // your search logic here
   }
 

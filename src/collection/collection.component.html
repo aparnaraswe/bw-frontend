@@ -4,10 +4,10 @@
   <div class="collection-grid">
     <div *ngFor="let product of products; let i = index">
       <div class="image-hover-wrapper">
-         <div class="image-hover-wrapper">
+         <!-- <div class="image-hover-wrapper">
                 <img [src]="product.defaultImg" alt="Normal" class="img-default">
                 <img [src]="product.defaultImg" alt="On Hover" class="img-hover">
-          </div>
+          </div> -->
         <!-- Click redirects to ProductComponent with product index -->
         <a [routerLink]="['/product']">
           <img [src]="product.defaultImg" alt="Normal" class="img-default">

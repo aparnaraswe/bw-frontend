@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   collections = [
-    { title: "MEN'S", image: '/category1.png', size: 'large', buttonText: 'EXPLORE' },
+    { title: "MEN'S", image: '/category1.png', size: 'small', buttonText: 'EXPLORE' },
     { title: "WOMEN'S", image: '/category2.png', size: 'small', buttonText: 'EXPLORE' },
     { title: "ACCESSORIES", image: '/category3.png', size: 'small', buttonText: 'EXPLORE' }
   ];

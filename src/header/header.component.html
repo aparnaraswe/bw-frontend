@@ -68,25 +68,34 @@
   </nav>
 
   <!-- Mobile Slide-Out Menu -->
-  <div class="mobile-backdrop" *ngIf="mobileMenuOpen" (click)="toggleMobileMenu()"></div>
-  <div class="mobile-menu" [class.open]="mobileMenuOpen">
-    <button class="close-btn" (click)="toggleMobileMenu()">✕</button>
-    <div class="mobile-links">
-      <div class="mobile-item" *ngFor="let item of navItems">
+  <!-- Mobile Slide-Out Menu -->
+<div class="mobile-backdrop" *ngIf="mobileMenuOpen" (click)="toggleMobileMenu()"></div>
+<div class="mobile-menu" [class.open]="mobileMenuOpen">
+  <button class="close-btn" (click)="toggleMobileMenu()">✕</button>
+  <ul class="mobile-links">
+    <li class="mobile-item" *ngFor="let item of navItems" [class.expanded]="item.expanded">
+      <!-- Top level link -->
+      <div class="mobile-link" (click)="item.dropdown ? item.expanded = !item.expanded : toggleMobileMenu()">
         <span>{{ item.label }}</span>
-        <div class="mobile-dropdown" *ngIf="item.dropdown">
-          <div *ngFor="let column of item.dropdown">
-            <h4>{{ column.title }}</h4>
-            <a *ngFor="let link of column.links"
-               [routerLink]="link.routerLink"
-               (click)="toggleMobileMenu()">
-              {{ link.label }}
-            </a>
-          </div>
+        <span *ngIf="item.dropdown" class="arrow">{{ item.expanded ? '−' : '+' }}</span>
+      </div>
+
+      <!-- Accordion style submenu -->
+      <div class="mobile-dropdown" *ngIf="item.dropdown && item.expanded">
+        <div *ngFor="let column of item.dropdown">
+          <h4>{{ column.title }}</h4>
+          <a *ngFor="let link of column.links"
+             [routerLink]="link.routerLink"
+             (click)="toggleMobileMenu()">
+            {{ link.label }}
+          </a>
         </div>
       </div>
-    </div>
-  </div>
+    </li>
+  </ul>
+</div>
+
+
 </header>
 
 
