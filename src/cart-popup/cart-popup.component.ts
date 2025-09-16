@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart-popup',
-  imports : [CommonModule],
+  imports : [CommonModule,RouterModule],
   templateUrl: './cart-popup.component.html',
   styleUrls: ['./cart-popup.component.css']
 })
@@ -12,6 +13,7 @@ export class CartPopupComponent {
   @Input() cartItems: any[] = [];
   @Output() close = new EventEmitter<void>();
 
+  constructor(private router: Router) {}
 
 get subtotal(): number {
     return this.cartItems.reduce((sum, item) => 
@@ -21,6 +23,14 @@ get subtotal(): number {
 
 }
 
+
+viewOrders() {
+    // Close cart drawer
+    this.closePopup();
+
+    // Redirect to /orders
+    this.router.navigate(['/orders']);
+  }
 
   closePopup() {
     this.close.emit();

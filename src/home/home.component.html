@@ -24,32 +24,6 @@
   </div>
 </section>
 
-<!-- Featured Products -->
-<section class="featured-products">
-  <div class="container">
-    <h2 class="section-title reveal-text" data-aos="fade-right" data-aos-duration="1000">FEATURED</h2>
-    <div class="products-grid stagger-grid">
-      <div class="product-card stagger-item" *ngFor="let product of featuredProducts; let i = index" 
-           [attr.data-aos]="'fade-up'" 
-           [attr.data-aos-delay]="100 * i" 
-           [attr.data-aos-duration]="800">
-        <div class="product-image">
-          <img [src]="product.image" [alt]="product.name" class="product-img" />
-          <div class="product-overlay">
-            <button class="quick-view" (click)="openQuickView(product)">
-              <span class="btn-hover-text">QUICK VIEW</span>
-            </button>
-          </div>
-        </div>
-        <div class="product-info">
-          <p class="product-name">{{ product.name }}</p>
-          <p class="price">{{ product.price }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Collections -->
 <section class="collections">
   <div class="container">
@@ -76,6 +50,34 @@
     </div>
   </div>
 </section>
+
+<!-- Featured Products -->
+<section class="featured-products">
+  <div class="container">
+    <h2 class="section-title reveal-text" data-aos="fade-right" data-aos-duration="1000">FEATURED</h2>
+    <div class="products-grid stagger-grid">
+      <div class="product-card stagger-item" *ngFor="let product of featuredProducts; let i = index" 
+           [attr.data-aos]="'fade-up'" 
+           [attr.data-aos-delay]="100 * i" 
+           [attr.data-aos-duration]="800">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name" class="product-img" />
+          <div class="product-overlay">
+            <button class="quick-view" (click)="openQuickView(product)">
+              <span class="btn-hover-text">QUICK VIEW</span>
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="price">{{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 <!-- Newsletter -->
 <section class="newsletter" data-aos="fade-up" data-aos-duration="1200">
