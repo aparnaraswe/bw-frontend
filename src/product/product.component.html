@@ -32,8 +32,8 @@
       </div>
 
       <!-- Collapsible Sections -->
-      <div class="collapsible" *ngFor="let item of collapsibles" (click)="item.open = !item.open">
-        <h4>{{ item.title }}</h4>
+      <div class="collapsible" *ngFor="let item of collapsibles" (click)="toggleCollapsible(item)">
+        <h4>{{ item.title }} {{item.open}}</h4>
         <p *ngIf="item.open">{{ item.content }}</p>
       </div>
     </div>

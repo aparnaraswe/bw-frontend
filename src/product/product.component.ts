@@ -52,15 +52,39 @@ product = {
     title: 'Viscose Wool Woven Tank Top',
     price: 54600,
     description: `The Woven Tank Top is tailored in Italy...`,
-    images: ['ED1SP25_M30019_900x.png'],
+    images: ['ED1SP25_M30019_900x.png','category1.png','ED1SP25_M30019_900x.png'],
     colors: ['Bone'],
     sizes: ['L', 'M', 'S']
   };
 
+  toggleCollapsible(item: any) {
+  item.open = !item.open;
+
+  if (item.open) {
+        console.log('ffffffffff' , item)
+
+    // Add some random extra text when opening
+    const randomTexts = [
+      " - Limited edition available!",
+      " - Hurry, only few left in stock.",
+      " - Customers love this product.",
+      " - Best seller in this category."
+    ];
+
+    const randomText = randomTexts[Math.floor(Math.random() * randomTexts.length)];
+
+    // Append only if not already appended
+    if (!item.content.includes(randomText)) {
+      item.content += randomText;
+    }
+  }
+}
+
+
 addToCart() {
     const item: CartItem = {
       name: this.product.title,
-      img: this.product.images[0],
+      img: this.product.images,
       price: Number(this.product.price),
       qty: 1,
       color: this.product.colors[0],

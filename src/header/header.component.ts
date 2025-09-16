@@ -169,8 +169,9 @@ onSearch() {
 }
 
   rightNav = [
+    
+    { label: 'BAG', action: () => this.openCart()},
     { label: 'ACCOUNT', routerLink: '/login' },
-    { label: 'BAG', action: () => this.openCart()}
   ];
 
   get cartCount(): number {

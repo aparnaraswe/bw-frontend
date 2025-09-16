@@ -33,38 +33,59 @@
     </div>
 
     <!-- Right options -->
-    <div class="nav-right">
-      <!-- Search -->
-      <div class="search-container" [class.active]="searchActive">
-        <button class="search-btn" (click)="toggleSearch()">
-          <span *ngIf="!searchActive">SEARCH</span>
-        </button>
+   <div class="nav-right">
+  <!-- Search -->
+ <!-- Search -->
+<div class="search-container" [class.active]="searchActive">
+  <button class="search-btn" (click)="toggleSearch()">
+    <!-- Search Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+         fill="currentColor" viewBox="0 0 24 24">
+      <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707
+               1.414-1.414-4.707-4.707A8 8 0 0010 2zm0
+               2a6 6 0 110 12A6 6 0 0110 4z"/>
+      </svg>
+  </button>
 
-        <div class="search-box" *ngIf="searchActive">
-          <input 
-            type="text" 
-            placeholder="ENTER KEYWORD" 
-            class="header-search"
-            [(ngModel)]="searchQuery"
-            (keyup.enter)="onSearch()"
-            (blur)="toggleSearch(false)"
-          />
-          <span class="arrow">→</span>
-        </div>
-      </div>
+  <!-- Like BW dropdown -->
+  <div class="search-dropdown" *ngIf="searchActive">
+    <input 
+      type="text" 
+      placeholder="ENTER KEYWORD" 
+      class="header-search"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="onSearch()"
+      (blur)="toggleSearch(false)"
+    />
+    <span class="arrow">→</span>
+  </div>
+</div>
 
-     <a *ngFor="let r of rightNav"
+  <!-- Right Nav -->
+  <a *ngFor="let r of rightNav"
      class="nav-item"
      routerLinkActive="active-link"
      (click)="r.label === 'BAG' ? openCart() : null"
-     [routerLink]="r.label !== 'BAG' ? r.routerLink : null">
-    <ng-container *ngIf="r.label === 'BAG'; else normalLink">
-      BAG <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
-    </ng-container>
-    <ng-template #normalLink>{{ r.label }}</ng-template>
-  </a>
+     [routerLink]="r.label !== 'BAG' ? r.routerLink : null"
+     [ngClass]="{'hide-mobile': r.label === 'ACCOUNT'}">
 
-    </div>
+    <ng-container *ngIf="r.label === 'BAG'; else normalLink">
+      <!-- Bag Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+           fill="currentColor" viewBox="0 0 24 24">
+        <path d="M6 2l1 4h10l1-4h2v2h-1.1l-1.8 16.2A2 2 0
+                 0115.1 22H8.9a2 2 0 01-1.99-1.8L5.1 4H4V2h2zm3
+                 6a3 3 0 006 0h-2a1 1 0 11-2 0H9z"/>
+      </svg>
+      <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+    </ng-container>
+
+    <ng-template #normalLink>
+      {{ r.label }}
+    </ng-template>
+  </a>
+</div>
+
   </nav>
 
   <!-- Mobile Slide-Out Menu -->
@@ -74,13 +95,11 @@
   <button class="close-btn" (click)="toggleMobileMenu()">✕</button>
   <ul class="mobile-links">
     <li class="mobile-item" *ngFor="let item of navItems" [class.expanded]="item.expanded">
-      <!-- Top level link -->
+      <!-- existing accordion -->
       <div class="mobile-link" (click)="item.dropdown ? item.expanded = !item.expanded : toggleMobileMenu()">
         <span>{{ item.label }}</span>
         <span *ngIf="item.dropdown" class="arrow">{{ item.expanded ? '−' : '+' }}</span>
       </div>
-
-      <!-- Accordion style submenu -->
       <div class="mobile-dropdown" *ngIf="item.dropdown && item.expanded">
         <div *ngFor="let column of item.dropdown">
           <h4>{{ column.title }}</h4>
@@ -92,8 +111,20 @@
         </div>
       </div>
     </li>
+
+    <!-- 👤 Account Option (only for mobile menu) -->
+    <li class="mobile-item">
+      <div class="mobile-link" (click)="toggleMobileMenu()" [routerLink]="'/login'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+             fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2a5 5 0 110 10 5 5 0 010-10zm0 12c-4.418 0-8 2.239-8 5v3h16v-3c0-2.761-3.582-5-8-5z"/>
+        </svg>
+        <span>Account</span>
+      </div>
+    </li>
   </ul>
 </div>
+
 
 
 </header>
