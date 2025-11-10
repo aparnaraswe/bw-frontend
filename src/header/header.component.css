@@ -100,11 +100,20 @@ a.active-link::after {
   box-sizing: border-box; /* ensure padding works inside */
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown .dropdown-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown.active .dropdown-content,
+.dropdown .dropdown-content.ng-star-inserted {
   display: flex;
   opacity: 1;
   transform: translateY(0);
 }
+
 
 .dropdown-column {
   flex: 1;

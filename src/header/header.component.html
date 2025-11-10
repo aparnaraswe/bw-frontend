@@ -6,24 +6,36 @@
     </div>
 
     <!-- Left options (desktop) -->
-    <div class="nav-left desktop-menu">
-      <div class="nav-item dropdown"
-           *ngFor="let item of navItems"
-           [class.active]="selectedNav === item.label"
-           (click)="setActive(item.label)">
-        <a class="main-link">{{ item.label }}</a>
-        <div class="dropdown-content" *ngIf="item.dropdown">
-          <div class="dropdown-column" *ngFor="let column of item.dropdown">
-            <h4>{{ column.title }}</h4>
-            <a *ngFor="let link of column.links"
-               [routerLink]="link.routerLink"
-               routerLinkActive="active-link">
-               {{ link.label }}
-            </a>
-          </div>
-        </div>
+   <div class="nav-left desktop-menu">
+  <div
+  class="nav-item dropdown"
+  *ngFor="let item of navItems"
+  [class.active]="item.isOpen"
+  (click)="toggleDropdown(item, $event)"
+>
+
+    <a class="main-link">{{ item.label }}</a>
+
+    <div
+      class="dropdown-content"
+      *ngIf="item.dropdown && item.isOpen"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="dropdown-column" *ngFor="let column of item.dropdown">
+        <h4>{{ column.title }}</h4>
+        <a
+          *ngFor="let link of column.links"
+          [routerLink]="link.routerLink"
+          routerLinkActive="active-link"
+          (click)="closeAllDropdowns()"
+        >
+          {{ link.label }}
+        </a>
       </div>
     </div>
+  </div>
+   </div>
+
 
     <!-- Center Logo -->
     <div class="nav-center">
@@ -88,14 +100,11 @@
 
   </nav>
 
-  <!-- Mobile Slide-Out Menu -->
-  <!-- Mobile Slide-Out Menu -->
 <div class="mobile-backdrop" *ngIf="mobileMenuOpen" (click)="toggleMobileMenu()"></div>
 <div class="mobile-menu" [class.open]="mobileMenuOpen">
   <button class="close-btn" (click)="toggleMobileMenu()">✕</button>
   <ul class="mobile-links">
     <li class="mobile-item" *ngFor="let item of navItems" [class.expanded]="item.expanded">
-      <!-- existing accordion -->
       <div class="mobile-link" (click)="item.dropdown ? item.expanded = !item.expanded : toggleMobileMenu()">
         <span>{{ item.label }}</span>
         <span *ngIf="item.dropdown" class="arrow">{{ item.expanded ? '−' : '+' }}</span>
@@ -112,7 +121,6 @@
       </div>
     </li>
 
-    <!-- 👤 Account Option (only for mobile menu) -->
     <li class="mobile-item">
       <div class="mobile-link" (click)="toggleMobileMenu()" [routerLink]="'/login'">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 

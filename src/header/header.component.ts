@@ -18,7 +18,8 @@ interface NavColumn {
 interface NavItem {
   label: string;
   dropdown?: NavColumn[];
-  expanded?  : boolean
+  expanded?  : boolean;
+  isOpen?: boolean
 }
 
 
@@ -183,5 +184,33 @@ onSearch() {
     const threshold = 20;
     this.isShrunk = (window.scrollY || document.documentElement.scrollTop || 0) > threshold;
   }
+
+ toggleDropdown(item: NavItem, event?: Event) {
+  event?.stopPropagation(); // 👈 Prevent document click listener from closing it immediately
+
+  // Close others
+  this.navItems.forEach(i => {
+    if (i !== item) i.isOpen = false;
+  });
+
+  // Toggle current one
+  item.isOpen = !item.isOpen;
+  this.selectedNav = item.isOpen ? item.label : null;
+}
+
+
+  closeAllDropdowns() {
+    this.navItems.forEach(i => i.isOpen = false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.dropdown')) {
+      this.closeAllDropdowns();
+    }
+  }
+
+
 
 }
